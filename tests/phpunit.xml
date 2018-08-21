@@ -8,7 +8,7 @@
 		syntaxCheck="true">
 	<testsuites>
 		<testsuite name="Test suite">
-			<directory>.</directory>
+			<directory>./analisis/test_login.php</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

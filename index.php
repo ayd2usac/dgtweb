@@ -5,7 +5,7 @@
 <html>
 <head>
 	<title>My page</title>
-	<link rel="stylesheet" href="/analisis/css/login.css">
+	<!--<link rel="stylesheet" href="/analisis/css/login.css">-->
 </head>
 <body>
 
