@@ -3,16 +3,16 @@
 <project name="dgtweb" default="build" basedir=".">
 
     <target name="build"
-        depends="build-common,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpcb" />
+        depends="build-common,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd" />
 
     <target name="build-clean"
-        depends="clean,build-common,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpcb" />
+        depends="clean,build-common,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd" />
 
     <target name="build-dox"
-        depends="build-common,phpdox,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpcb" />
+        depends="build-common,phpdox,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd" />
 
     <target name="build-dox-clean"
-        depends="clean,build-common,phpdox,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpcb" />
+        depends="clean,build-common,phpdox,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd" />
 
     <target name="build-parallel"
         depends="build-common,tools-parallel" />
@@ -28,8 +28,7 @@
                 <antcall target="pdepend" />
                 <antcall target="phpcs-ci" />
                 <antcall target="phpmd-ci" />
-            </sequential>
-            <antcall target="phpcb" />
+            </sequential>            
             <antcall target="phpcpd" />
             <antcall target="phpdox" />
             <antcall target="phploc" />
