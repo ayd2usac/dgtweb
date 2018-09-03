@@ -94,4 +94,6 @@
             </div>
         </div>
     </body>
+
+    <footer> Negagope &reg; </footer>
 </html>
