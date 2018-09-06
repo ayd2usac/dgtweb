@@ -17,7 +17,7 @@
                             <label for="departamento" class="col-sm-4 col-form-label text-md-right">Departamento *</label>
 
                             <div class="col-md-6">
-                                <select class="form-control {{ $errors->has('departamento') ? ' has-error' : '' }}" id="departamento" name="departamento" required="true" >
+                                <select class="form-control {{ $errors->has('departamento') ? ' has-error' : '' }}" id="departamento" name="departamento" required="true" autofocus >
                                     <option value=""> Seleccione...</option>
                                     @foreach ($departamentos as $_departamento)
                                         <option value="{{$_departamento->id}}"
@@ -75,7 +75,7 @@
                             <label for="address" class="col-sm-4 control-label text-md-right">Dirección</label>
                             <div class="col-md-6">
                             
-                              <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required autofocus>                                                            
+                              <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }}" required>                                                            
 
                                 @if ($errors->has('address'))
                                     <span class="help-block">
@@ -122,15 +122,17 @@
                         <!-- imagenes     -->
                         <div class="form-group row"> 
                             <label for="details" class="col-sm-4 control-label text-md-right">Fotos</label>
-                        <div class="input-group control-group increment col-md-6" >
-                          <input type="file" name="filename" class="form-control">
-                          <div class="input-group-btn"> 
-                            <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
-                          </div>
-                        </div>
+                            <div class="input-group control-group increment col-md-6">
+                                <div id="divFotos">
+                                    <div>                                                                                
+                                        <input class="inputImage" type="file" name="filename[]" class="form-control" accept="image/*" onchange="loadFile(event, $(this).parent())">
+                                        <div class="divImg"></div>                                                                                
+                                    </div>                                     
+                                </div>                                                        
+                            </div>
                         </div>
 
-        <!-- imagenes   -->
+                        <!-- imagenes   -->
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -149,4 +151,26 @@
         </div>
     </div>
 </div>
+
+<script>
+  var loadFile = function(event, ctrl) {
+      try{
+        //ctrl.find("button").show();
+        var img = '<img src="' +URL.createObjectURL(event.target.files[0]) + '" width="100px" height="150">';
+        ctrl.find(".divImg").append(img);   
+        var btnQuitar = '<button class="btn btn-link" onclick="$(this).parent().remove()" type="button"><i class="glyphicon glyphicon-plus"></i> Quitar </button>';              
+        ctrl.append(btnQuitar);
+        agregarInputImage();
+      }catch(ex){
+      }
+  };
+
+  function agregarInputImage(){
+    $(".inputImage").hide();
+    var input = '<div><input class="inputImage" type="file" name="filename[]" class="form-control" accept="image/*" onchange="loadFile(event, $(this).parent())"><div class="divImg"></div></div>';
+
+    $('#divFotos').append(input);
+
+  }
+</script>
 @endsection

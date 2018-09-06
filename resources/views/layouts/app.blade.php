@@ -28,10 +28,7 @@
                 color: white;
                 text-align: center;
                 font-size: 15px;
-                position: fixed;
-                width: 100%;
-                left: 0;
-                bottom: 0;
+                
             }
     </style>
 </head>

@@ -17,7 +17,7 @@ class CreateTablePhotos extends Migration
             $table->increments('id');                        
             $table->timestamps();
             $table->uuid('uuid');            
-
+            $table->string('url');
             $table->integer('complaint_id')->unsigned(); 
         });
     }

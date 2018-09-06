@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\ComplaintType;
 use App\Complaint;
+use App\Photo;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -45,6 +46,7 @@ class ComplaintsController extends Controller
      */
     public function store(Request $request)
     {        
+        //dd($request->filename->clientExtension());
         $denuncia = new Complaint;
         $denuncia->uuid = Str::uuid();
         $denuncia->location_id = $request->zona;
@@ -53,8 +55,25 @@ class ComplaintsController extends Controller
         $denuncia->address = $request->address;
         $denuncia->save();
 
-        $imgUUID = Str::uuid();
-        //$storagePath = Storage::disk('s3')->put("uploads/".$imgUUID, \File::get($request->file('filename')), 'public');
+        
+        //$storagePath = Storage::disk('s3')->put("uploads/".$imgUUID, $request->file('filename'));
+        
+        foreach ($request->filename as $updatedFile) {
+            if ($request->hasFile('filename')) {
+                $imgUUID = Str::uuid();
+                $file = $updatedFile;                
+                $filePath = 'uploads/' . $imgUUID . '.' . $updatedFile->clientExtension();
+                
+                if (Storage::disk('s3')->put($filePath, file_get_contents($file))){
+                    $photo = new Photo;
+                    $photo->url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/uploads/' . $imgUUID . '.' . $updatedFile->clientExtension();
+                    $photo->uuid = $imgUUID;
+                    $photo->complaint_id = $denuncia->id;
+                    $photo->save();
+                }
+           }    
+        }
+        
         return view('complaints.store');
     }
 
