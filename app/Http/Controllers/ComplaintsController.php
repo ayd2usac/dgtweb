@@ -53,7 +53,8 @@ class ComplaintsController extends Controller
         $denuncia->address = $request->address;
         $denuncia->save();
 
-        //$storagePath = Storage::disk('s3')->put("uploads/test", $request->, 'public');
+        $imgUUID = Str::uuid();
+        //$storagePath = Storage::disk('s3')->put("uploads/".$imgUUID, \File::get($request->file('filename')), 'public');
         return view('complaints.store');
     }
 

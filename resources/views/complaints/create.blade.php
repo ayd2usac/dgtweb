@@ -123,7 +123,7 @@
                         <div class="form-group row"> 
                             <label for="details" class="col-sm-4 control-label text-md-right">Fotos</label>
                         <div class="input-group control-group increment col-md-6" >
-                          <input type="file" name="filename[]" class="form-control">
+                          <input type="file" name="filename" class="form-control">
                           <div class="input-group-btn"> 
                             <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                           </div>
