@@ -16,4 +16,18 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function testHome()
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
+
+    public function testComplaintsCreate()
+    {
+        $response = $this->get('/complaints/create');
+
+        $response->assertStatus(200);
+    }
 }
