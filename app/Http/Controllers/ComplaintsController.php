@@ -130,4 +130,9 @@ class ComplaintsController extends Controller
     {
         //
     }
+
+    public function all()
+    {
+        return Complaint::all();
+    }
 }
