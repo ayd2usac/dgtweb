@@ -64,14 +64,22 @@ class ComplaintsController extends Controller
                 $file = $updatedFile;                
                 $filePath = 'uploads/' . $imgUUID . '.' . $updatedFile->clientExtension();
                 
+                $photo = new Photo;                    
+                $photo->url = $filePath;
+                $photo->uuid = $imgUUID;
+                $photo->complaint_id = $denuncia->id;
+                $photo->save();
+                /*
                 if (Storage::disk('s3')->put($filePath, file_get_contents($file))){
                     $photo = new Photo;
                     //$photo->url = 'https://s3.' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/' . env('AWS_BUCKET') . '/uploads/' . $imgUUID . '.' . $updatedFile->clientExtension();
-			$photo->url = $imgUUID.'+'.$updatedFile->clientExtension();
+			        $photo->url = $imgUUID.'+'.$updatedFile->clientExtension();
                     $photo->uuid = $imgUUID;
                     $photo->complaint_id = $denuncia->id;
                     $photo->save();
                 }
+                */
+
            }    
         }
         
